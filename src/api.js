@@ -14,13 +14,12 @@ async function request(path, options = {}) {
 export const api = {
   csrf: () => request('/auth/csrf'),
   login: credentials => request('/auth/login', { method: 'POST', body: JSON.stringify(credentials) }),
+  firebaseLogin: credentials => request('/auth/firebase', { method: 'POST', body: JSON.stringify(credentials) }),
   register: credentials => request('/auth/register', { method: 'POST', body: JSON.stringify(credentials) }),
   logout: () => request('/auth/logout', { method: 'POST' }),
   me: () => request('/auth/me'),
   train: number => request(`/trains/${encodeURIComponent(number)}`),
   book: reservation => request('/reservations', { method: 'POST', body: JSON.stringify(reservation) }),
-  createPaymentOrder: reservation => request('/payments/order', { method: 'POST', body: JSON.stringify(reservation) }),
-  verifyPayment: payment => request('/payments/verify', { method: 'POST', body: JSON.stringify(payment) }),
   fetchBooking: pnr => request(`/reservations/${encodeURIComponent(pnr)}`),
   cancel: pnr => request(`/reservations/${encodeURIComponent(pnr)}`, { method: 'DELETE' })
 };
